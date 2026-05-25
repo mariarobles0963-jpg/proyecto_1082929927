@@ -565,5 +565,55 @@ Estado  : ⏳ pendiente de crear
 
 ---
 
+---
+
+### Ejecución automatizada — 2026-05-25T07:34:02.1431681-05:00
+
+**Fase:** 0 — Prerrequisitos
+
+**Ejecutor:** Ingeniero Fullstack Senior (ejecución automatizada desde workspace)
+
+**Registro de inicio:**
+```
+Fecha y hora de inicio : 2026-05-25T07:34:02.1431681-05:00
+Ejecutor               : Ingeniero Fullstack Senior
+Observaciones iniciales: Se ejecutaron comprobaciones locales de Node, npm, Git y Vercel CLI para validar el entorno.
+```
+
+**Resultados de las comprobaciones (salida del sistema):**
+```
+Timestamp           : 2026-05-25T07:34:02.1431681-05:00
+node --version      : NOT FOUND (comando 'node' no reconocido)
+npm --version       : NOT FOUND (comando 'npm' no reconocido)
+git --version       : git version 2.53.0.windows.1
+git config user.name: maria robles
+git config user.email: maria.robles02@usa.edu.co
+vercel --version    : NOT FOUND (comando 'vercel' no reconocido)
+```
+
+**Evaluación y estado:**
+```
+Estado final        : ❌ BLOQUEADO
+Motivo              : Node.js / npm no disponibles en el PATH y Vercel CLI no instalado. Sin Node/npm no es posible ejecutar `npm run dev`, `npm run type-check` ni realizar builds locales. Vercel CLI ausente impide pruebas de despliegue local.
+```
+
+**Acciones realizadas:**
+```
+1) Verificación de versiones ejecutada desde PowerShell en el workspace
+2) Recolección de usuario Git configurado
+3) Registro de la ejecución y generación de este resumen
+```
+
+**Siguientes pasos recomendados (para desbloquear):**
+```
+1. Instalar Node.js LTS (recomendado: 20.x o la versión estable indicada en el plan). Descargar desde https://nodejs.org/ o usar nvm/wsl según preferencia.
+2. Verificar que `node --version` y `npm --version` respondan correctamente y estén en el PATH.
+3. Instalar Vercel CLI: `npm install -g vercel` y ejecutar `vercel login` para vincular cuenta.
+4. Re-ejecutar las comprobaciones: `node --version; npm --version; git --version; vercel --version; vercel whoami`.
+5. Una vez completado, volver a ejecutar la Fase 0 para marcarla como COMPLETADO y generar `resumen-fase-0-prerrequisitos.md` final.
+```
+
+---
+
 *Estado de Ejecución — Versión 1.0.0*
 *Documentos de referencia: plan-infraestructura-fullstack.md · plan-implementacion-fases.md · prompts-ejecucion.md*
