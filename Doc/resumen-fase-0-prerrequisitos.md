@@ -1,4 +1,86 @@
 # Resumen — Fase 0: Prerrequisitos
+
+**Fecha:** 2026-05-25T07:34:02.1431681-05:00
+**Ejecutor:** Ingeniero Fullstack Senior (ejecución automatizada desde workspace)
+
+## Objetivo
+Verificar el entorno de desarrollo local: Node.js, npm, Git y Vercel CLI. Registrar hallazgos y proponer acciones para desbloquear la ejecución de las fases siguientes.
+
+## Comprobaciones realizadas
+
+```
+Timestamp           : 2026-05-25T07:34:02.1431681-05:00
+node --version      : NOT FOUND (comando 'node' no reconocido)
+npm --version       : NOT FOUND (comando 'npm' no reconocido)
+git --version       : git version 2.53.0.windows.1
+git config user.name: maria robles
+git config user.email: maria.robles02@usa.edu.co
+vercel --version    : NOT FOUND (comando 'vercel' no reconocido)
+```
+
+## Evaluación
+
+- Node.js y npm NO están disponibles en el PATH del sistema: esto impide ejecutar scripts `npm`, `node` y realizar builds locales.
+- Git está instalado y configurado con usuario identificado.
+- Vercel CLI no está instalado; sin él no se puede probar despliegues locales ni ejecutar `vercel whoami`.
+
+## Problemas encontrados
+
+- Falta de runtime de Node.js / npm en la sesión actual.
+- Falta de Vercel CLI.
+
+## Acciones recomendadas (pasos para desbloquear)
+
+Ejecutar los siguientes comandos o acciones en la máquina local (PowerShell):
+
+1) Instalar Node.js LTS (se recomienda la versión indicada en el plan, p. ej. 20.x):
+
+```powershell
+# Descargar e instalar desde la web oficial o usar nvm-windows
+# Ejemplo con winget (si está disponible):
+winget install OpenJS.NodeJS.LTS
+# O visitar: https://nodejs.org/
+```
+
+2) Verificar instalación y PATH:
+
+```powershell
+node --version
+npm --version
+```
+
+3) Instalar Vercel CLI globalmente e iniciar sesión:
+
+```powershell
+npm install -g vercel
+vercel login
+```
+
+4) Re-ejecutar las comprobaciones finales:
+
+```powershell
+Get-Date -Format o
+node --version
+npm --version
+git --version
+vercel --version
+vercel whoami
+```
+
+5) Volver a ejecutar la Fase 0 desde este repositorio para que el estado quede marcado como COMPLETADO y se genere el resumen final.
+
+## Criterios de validación (al volver a ejecutar)
+
+- [ ] `node --version` responde con versión >= 20.x
+- [ ] `npm --version` responde correctamente
+- [ ] `git --version` responde correctamente
+- [ ] `vercel --version` responde y `vercel whoami` muestra la cuenta vinculada
+
+## Notas
+
+- Si prefieres no instalar Node.js globalmente, puedes usar `nvm` o `nvm-windows` para gestionar versiones.
+- Si necesitas que ejecute de nuevo las comprobaciones después de instalar, dime y lo ejecuto aquí.
+# Resumen — Fase 0: Prerrequisitos
 > **Ingeniero Fullstack Senior** — Verificación y Configuración del Entorno Local
 
 ---
