@@ -18,7 +18,7 @@
 | Fase | Nombre | Rol asignado | Estado | Fecha inicio | Fecha cierre | Archivo resumen |
 |---|---|---|---|---|---|---|
 | 0 | Prerrequisitos | Ingeniero de Proyectos | Pendiente |  |  | resumen-fase-0-prerrequisitos.md |
-| 1 | Bootstrap, Login y dataService base | Ingeniero Fullstack Senior — Arquitecto del sistema y seguridad | En progreso | 2026-05-25T08:00:00 |  | resumen-fase-1_bootstrap.md |
+| 1 | Bootstrap, Login y dataService base | Ingeniero Fullstack Senior — Arquitecto del sistema y seguridad | Completada | 2026-05-25T08:00:00 | 2026-05-25T08:12:00 | resumen-fase-1_bootstrap.md |
 | 2 | Dashboard, Layout y bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | Pendiente |  |  | resumen-fase-2_layout.md |
 | 3 | Inventario (Productos y Configuración) | Ingeniero Fullstack — Catálogo de productos con umbral configurable | Pendiente |  |  | resumen-fase-3_inventario.md |
 | 4 | Ventas e Historial | Ingeniero Fullstack — Registro de ventas con snapshots y trazabilidad | Pendiente |  |  | resumen-fase-4_ventas.md |
