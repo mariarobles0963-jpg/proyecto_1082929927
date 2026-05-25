@@ -19,3 +19,18 @@ body {
   height: 100%;
 }
 
+:root {
+  --ss-primary: #EC4899; /* rosa */
+  --ss-accent: #8B5CF6; /* violeta */
+  --ss-bg-from: #fff1f2; /* from-pink-100 */
+  --ss-bg-to: #f3e8ff; /* to-purple-100 */
+  --ss-lowstock-bg: #FFFBEB;
+  --ss-lowstock-border: #D97706;
+  --ss-success: #10B981;
+}
+
+body {
+  background: linear-gradient(180deg, var(--ss-bg-from), var(--ss-bg-to));
+  color: #111827;
+}
+
