@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": "user_admin_1",
+      "name": "Admin SweetStock",
+      "email": "admin@sweetstock.local",
+      "password": "admin123", 
+      "role": "admin",
+      "must_change_password": false
+    }
+  ],
+  "system_config": {
+    "low_stock_threshold": 5
+  },
+  "products": [
+    {
+      "id": "p1",
+      "name": "Chicles de Menta",
+      "price": 800,
+      "current_stock": 20,
+      "is_active": true
+    },
+    {
+      "id": "p2",
+      "name": "Bombones de Fresa",
+      "price": 1200,
+      "current_stock": 8,
+      "is_active": true
+    },
+    {
+      "id": "p3",
+      "name": "Chocolatinas",
+      "price": 1500,
+      "current_stock": 3,
+      "is_active": true
+    }
+  ]
+}
