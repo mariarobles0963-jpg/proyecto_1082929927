@@ -1,36 +1,52 @@
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
-import { getUsers } from "@/lib/db/seedReader";
+import { buildSessionCookie, createJwt, findUserByEmail, verifyPassword } from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, password } = body;
 
-    if (!email || !password) {
-      return NextResponse.json({ error: "Missing credentials" }, { status: 400 });
+    if (
+      typeof body?.email !== "string" ||
+      typeof body?.password !== "string" ||
+      !body.email.trim() ||
+      !body.password.trim()
+    ) {
+      return NextResponse.json(
+        { error: "Email y contraseña son obligatorios." },
+        { status: 400 }
+      );
     }
 
-    const users = getUsers();
-    const user = users.find((u) => u.email === email);
-
-    if (!user) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    const user = findUserByEmail(body.email);
+    if (!user || !verifyPassword(body.password, user)) {
+      return NextResponse.json(
+        { error: "Email o contraseña inválidos." },
+        { status: 401 }
+      );
     }
 
-    // NOTE: seed.json stores plaintext passwords for dev/seed mode.
-    // In production, passwords must be hashed and compared with bcrypt.
-    if (user.password !== password) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
+    const jwt = createJwt({
+      userId: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    });
 
-    const secret = process.env.JWT_SECRET || "dev-secret";
-    const token = jwt.sign({ userId: user.id, role: user.role, email: user.email }, secret, { expiresIn: "24h" });
-
-    const res = NextResponse.json({ token, user: { id: user.id, email: user.email, role: user.role } });
-    res.cookies.set("token", token, { httpOnly: true, path: "/", maxAge: 60 * 60 * 24 });
-    return res;
-  } catch (err) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    const response = NextResponse.json(
+      {
+        message: "Inicio de sesión exitoso.",
+        user: {
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      },
+      { status: 200 }
+    );
+    response.headers.set("Set-Cookie", buildSessionCookie(jwt));
+    return response;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Error interno";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

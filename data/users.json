@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "user_admin_1",
+      "name": "Administrador",
+      "email": "admin@sweetstock.com",
+      "role": "admin",
+      "passwordSalt": "sweetstock-admin",
+      "passwordHash": "78f472b310b829fb2db8421a9e8f8069419bac83020cbb8b84fd879bb7305134",
+      "isActive": true,
+      "mustChangePassword": false
+    }
+  ]
+}

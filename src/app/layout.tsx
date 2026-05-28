@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mi App Fullstack TS",
-  description: "Sistema fullstack con TypeScript, Next.js y Vercel",
+  title: "SweetStock",
+  description: "Administración de inventario y ventas para dulcerías con Next.js",
 };
 
 export default function RootLayout({
