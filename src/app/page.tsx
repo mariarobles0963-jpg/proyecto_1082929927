@@ -14,6 +14,7 @@
 
 import HolaMundo from "@/components/HolaMundo/HolaMundo";
 import { readJson } from "@/lib/db/reader";
+import Link from "next/link";
 import type { HomeData } from "@/lib/db/types";
 import type { EffectType } from "@/components/HolaMundo/HolaMundo.types";
 
@@ -22,12 +23,22 @@ export default function HomePage() {
   const { hero } = readJson<HomeData>("pages/home");
 
   return (
-    <HolaMundo
-      title={hero.title}
-      subtitle={hero.subtitle}
-      description={hero.description}
-      effect={hero.effect as EffectType}
-    />
+    <main>
+      <HolaMundo
+        title={hero.title}
+        subtitle={hero.subtitle}
+        description={hero.description}
+        effect={hero.effect as EffectType}
+      />
+      <div className="fixed bottom-8 left-0 right-0 flex justify-center px-4">
+        <Link
+          href="/login"
+          className="rounded-full bg-fuchsia-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/30 transition hover:bg-fuchsia-700"
+        >
+          Iniciar sesión
+        </Link>
+      </div>
+    </main>
   );
 }
 
