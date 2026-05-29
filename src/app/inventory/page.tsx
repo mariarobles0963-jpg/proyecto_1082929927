@@ -1,6 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 import { getProducts, getSystemConfig } from '@/lib/db/seedReader';
 import LowStockAlert from '@/components/LowStockAlert/LowStockAlert';
+import SeedModeBanner from '@/components/SeedModeBanner/SeedModeBanner';
 
 export default function InventoryPage(){
   const products = getProducts();
@@ -10,7 +12,19 @@ export default function InventoryPage(){
 
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Inventario</h1>
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold mb-2">Inventario</h1>
+          <p className="text-sm text-slate-600">Revisa tu catálogo y controla el stock antes de abrir la dulcería.</p>
+        </div>
+        <Link
+          href="/inventory/new"
+          className="inline-flex items-center justify-center rounded-2xl bg-fuchsia-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-fuchsia-700"
+        >
+          Agregar producto
+        </Link>
+      </div>
+      <SeedModeBanner />
       <LowStockAlert items={low} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {products.filter(p => p.is_active).map(prod => (

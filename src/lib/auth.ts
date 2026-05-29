@@ -150,12 +150,13 @@ export function verifyJwt(token: string): AuthTokenPayload | null {
 
 export function buildSessionCookie(token: string) {
   const secure = process.env.NODE_ENV === "production" ? "Secure; " : "";
-  return `${SESSION_COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_MAX_AGE_SECONDS}; ${secure}`;
+  // Use SameSite=Lax to allow navigation-based login flows while keeping CSRF protections
+  return `${SESSION_COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${SESSION_MAX_AGE_SECONDS}; ${secure}`;
 }
 
 export function clearSessionCookie() {
   const secure = process.env.NODE_ENV === "production" ? "Secure; " : "";
-  return `${SESSION_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ${secure}`;
+  return `${SESSION_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; ${secure}`;
 }
 
 export function getSessionPayloadFromRequest(request: NextRequest): AuthTokenPayload | null {
@@ -165,4 +166,17 @@ export function getSessionPayloadFromRequest(request: NextRequest): AuthTokenPay
   }
 
   return verifyJwt(cookie);
+}
+
+export function requireRole(request: NextRequest, roles: AuthRole[]) {
+  const payload = getSessionPayloadFromRequest(request);
+  if (!payload) {
+    throw new Error('No autenticado.');
+  }
+
+  if (!roles.includes(payload.role)) {
+    throw new Error('No tienes permisos para realizar esta acción.');
+  }
+
+  return payload;
 }
